@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "pharmacy.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "pharmacy.db")
 
 
 class DictCursor(sqlite3.Cursor):
