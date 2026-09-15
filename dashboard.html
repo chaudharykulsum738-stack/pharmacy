@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Owner Dashboard</h1>
+<div class="subtitle">Live inventory, expiry alerts, and substitute suggestions</div>
+
+{% if error %}
+<div class="msg error">{{ error }}</div>
+{% endif %}
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-num">{{ medicines|length }}</div>
+    <div class="stat-label">Total medicines</div>
+  </div>
+  <div class="stat-card danger">
+    <div class="stat-num">{{ medicines|selectattr('stock_status', 'equalto', 'Low Stock')|list|length }}</div>
+    <div class="stat-label">Low stock</div>
+  </div>
+  <div class="stat-card danger">
+    <div class="stat-num">{{ expired|length }}</div>
+    <div class="stat-label">Expired</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="stat-num">{{ expiring_soon|length }}</div>
+    <div class="stat-label">Expiring within 15 days</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-card">
+    <div class="stat-num">{{ fast_moving|length }}</div>
+    <div class="stat-label">Fast-moving medicines</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ slow_moving|length }}</div>
+    <div class="stat-label">Slow-moving medicines</div>
+  </div>
+  <div class="stat-card warn">
+    <div class="stat-num">{{ unusual_purchases|length }}</div>
+    <div class="stat-label">Unusual transactions to review</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">{{ refill_reminders|length }}</div>
+    <div class="stat-label">Possible refill reminders</div>
+  </div>
+</div>
+
+{% if expired %}
+<div class="expiry-banner" style="background:var(--red-bg); border-color:#f0b3ab;">
+  <div class="panel-title" style="color:var(--red);">Expired — Remove From Shelf</div>
+  <div class="expiry-list">
+    {% for med in expired %}
+    <div class="expiry-row">
+      <span>{{ med.medicine_name }} (Stock: {{ med.stock_quantity }})</span>
+      <span class="days" style="color:var(--red);">Expired {{ med.expiry_date }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<div class="expiry-banner">
+  <div class="panel-title">Expiring Soon</div>
+  {% if expiring_soon %}
+  <div class="expiry-list">
+    {% for med in expiring_soon %}
+    <div class="expiry-row">
+      <span>{{ med.medicine_name }} (Stock: {{ med.stock_quantity }})</span>
+      <span class="days">{{ med.expiry_date }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="expiry-empty">Nothing expiring in the next 15 days.</div>
+  {% endif %}
+</div>
+
+{% if unusual_purchases %}
+<div class="expiry-banner" style="background:var(--amber-bg); border-color:#f0d6ab;">
+  <div class="panel-title" style="color:var(--amber);">Unusual Transactions — Pharmacist Review Recommended</div>
+  <div style="font-size:12px; color:var(--ink-soft); margin-bottom:8px;">
+    Flagged for review only — this is not an accusation of misuse.
+  </div>
+  <div class="expiry-list">
+    {% for u in unusual_purchases %}
+    <div class="expiry-row">
+      <span>{{ u.medicine_name }} — {{ u.quantity_sold }} units to {{ u.customer_name }} (typical: {{ u.typical_quantity }})</span>
+      <span class="days" style="color:var(--amber);">{{ u.sale_date }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% if refill_reminders %}
+<div class="panel">
+  <div class="panel-title">Possible Refill Reminders</div>
+  <div style="font-size:12px; color:var(--ink-soft); margin-bottom:10px;">
+    Regular purchase pattern detected — pharmacist may verify customer requirement. This is not an assumption the customer needs the medicine.
+  </div>
+  <table>
+    <tr><th>Customer</th><th>Medicine</th><th>Times Purchased</th><th>Last Purchase</th></tr>
+    {% for r in refill_reminders %}
+    <tr>
+      <td>{{ r.customer_name }}</td>
+      <td class="med-name">{{ r.medicine_name }}</td>
+      <td class="mono">{{ r.purchase_count }}</td>
+      <td class="mono">{{ r.last_purchase_date }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+<div class="panel">
+  <div class="panel-title" style="display:flex; justify-content:space-between; align-items:center;">
+    <span>Medicine Inventory</span>
+    <a href="/export_inventory_report" class="btn" style="margin-top:0; font-size:12px; padding:6px 12px; text-decoration:none;">Export Report (CSV)</a>
+  </div>
+  <div style="display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap;">
+    <input type="text" id="med-search" placeholder="Search by name..." style="flex:1; min-width:180px;" onkeyup="filterInventory()">
+    <select id="category-filter" onchange="filterInventory()">
+      <option value="">All categories</option>
+      {% for cat in medicines|map(attribute='category')|unique|sort %}
+      <option value="{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <select id="status-filter" onchange="filterInventory()">
+      <option value="">All statuses</option>
+      <option value="Low Stock">Low Stock only</option>
+      <option value="OK">OK only</option>
+    </select>
+  </div>
+  {% if medicines %}
+  <table id="inventory-table">
+    <tr><th>Medicine</th><th>Category</th><th>Stock</th><th>Min Level</th><th>Expiry</th><th>Cabinet</th><th>Status</th><th>Actions</th></tr>
+    {% for med in medicines %}
+    <tr class="inventory-row" data-name="{{ med.medicine_name|lower }}" data-category="{{ med.category }}" data-status="{{ med.stock_status }}">
+      <td class="med-name">
+        {{ med.medicine_name }}
+        {% if med.dosage_strength %}<span class="cabinet-tag" style="margin-left:4px;">{{ med.dosage_strength }}</span>{% endif %}
+        {% if med.prescription_required == 'Yes' %}<span class="status-pill status-low" style="margin-left:4px;"><span class="dot"></span>Rx</span>{% endif %}
+        {% if med.usage_description %}
+        <div class="sub-note" style="color:var(--ink-soft);">{{ med.usage_description }}</div>
+        {% endif %}
+        {% if med.storage_condition and med.storage_condition != 'Room temperature' %}
+        <div class="sub-note" style="color:var(--amber);">Storage: {{ med.storage_condition }}</div>
+        {% endif %}
+      </td>
+      <td>{{ med.category }}</td>
+      <td class="mono">{{ med.stock_quantity }}</td>
+      <td class="mono">{{ med.min_stock_level }}</td>
+      <td class="mono">{{ med.expiry_date }}</td>
+      <td><span class="cabinet-tag">#{{ med.cabinet_id }}</span></td>
+      <td>
+        {% if med.stock_status == 'Low Stock' %}
+        <span class="status-pill status-low"><span class="dot"></span>Low Stock</span>
+        {% else %}
+        <span class="status-pill status-ok"><span class="dot"></span>OK</span>
+        {% endif %}
+        {% if med.substitutes %}
+        <div class="sub-note">Substitutes available: {% for s in med.substitutes %}{{ s.medicine_name }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+        {% endif %}
+      </td>
+      <td><a href="/edit_medicine/{{ med.medicine_id }}" style="color:var(--teal-700); font-weight:600; font-size:12.5px; text-decoration:none;">Edit</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="expiry-empty">No medicines added yet. Head to "Add Medicine" to get started.</div>
+  {% endif %}
+</div>
+
+<script>
+  function filterInventory() {
+    const search = document.getElementById('med-search').value.toLowerCase();
+    const category = document.getElementById('category-filter').value;
+    const status = document.getElementById('status-filter').value;
+    const rows = document.querySelectorAll('.inventory-row');
+
+    rows.forEach(row => {
+      const nameMatch = row.dataset.name.includes(search);
+      const categoryMatch = !category || row.dataset.category === category;
+      const statusMatch = !status || row.dataset.status === status;
+      row.style.display = (nameMatch && categoryMatch && statusMatch) ? '' : 'none';
+    });
+  }
+</script>
+
+{% endblock %}

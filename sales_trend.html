@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Sales Trends - Smart Pharmacy{% endblock %}
+{% block extra_head %}
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+{% endblock %}
+{% block content %}
+
+<h1>Sales Trends</h1>
+<div class="subtitle">Daily sales volume and top-selling medicines, based on your recorded sales</div>
+
+<div class="panel">
+  {{ daily_chart | safe }}
+</div>
+
+<div class="panel">
+  {{ top_chart | safe }}
+</div>
+
+<div class="panel">
+  <div style="font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;">
+    <strong>Real-world reference data</strong> - Source: "Pharma Sales Data" (Kaggle, milanzdravkovic), real pharmacy transactions 2014-2019.
+    Shown for comparison against your own sales categories - not your data.
+  </div>
+  {{ benchmark_chart | safe }}
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In - Smart Pharmacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+{% include '_pwa_head.html' %}
+</head>
+<body>
+<div class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-mark">+</div>
+    <div class="auth-brand">Smart Pharmacy</div>
+    <div class="auth-tagline">Owner Console — Log In</div>
+
+    {% if error %}
+    <div class="msg error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      <div class="form-field full"><label>Email</label><input type="email" name="email" required></div>
+      <div class="form-field full" style="margin-top:12px;"><label>Password</label><input type="password" name="password" required></div>
+      <button type="submit" class="btn" style="margin-top:18px;">Log In</button>
+    </form>
+
+    <div class="auth-switch">Don't have an account? <a href="/register">Register here</a></div>
+  </div>
+</div>
+{% include '_pwa_register.html' %}
+</body>
+</html>

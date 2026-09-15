@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Manage Substitutes - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Manage Substitute Medicines</h1>
+<div class="subtitle">Link medicines that can stand in for each other when one runs low</div>
+
+{% if message %}
+<div class="msg {{ 'success' if success else 'error' }}">{{ message }}</div>
+{% endif %}
+
+<div class="panel">
+  <div class="panel-title">Add a Substitute Link</div>
+  <form method="POST">
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Medicine</label>
+        <select name="medicine_id" required>
+          {% for med in all_medicines %}
+          <option value="{{ med.medicine_id }}">{{ med.medicine_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Is a substitute for / Substitute is</label>
+        <select name="substitute_id" required>
+          {% for med in all_medicines %}
+          <option value="{{ med.medicine_id }}">{{ med.medicine_name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn">Link as Substitutes</button>
+  </form>
+</div>
+
+<div class="panel">
+  <div class="panel-title">Existing Substitute Links</div>
+  {% if existing_links %}
+  <table>
+    <tr><th>Medicine</th><th>Substitute</th><th>Actions</th></tr>
+    {% for link in existing_links %}
+    {% if link.medicine_id < link.substitute_medicine_id %}
+    <tr>
+      <td class="med-name">{{ link.medicine_name }}</td>
+      <td>{{ link.substitute_name }}</td>
+      <td>
+        <form method="POST" action="/remove_substitute/{{ link.substitute_id }}" style="display:inline;" onsubmit="return confirm('Remove this substitute link?');">
+          <button type="submit" style="background:none; border:none; color:var(--red); font-weight:600; font-size:12.5px; cursor:pointer; padding:0;">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+  {% else %}
+  <div class="expiry-empty">No substitute links yet. Add one above.</div>
+  {% endif %}
+</div>
+
+{% endblock %}

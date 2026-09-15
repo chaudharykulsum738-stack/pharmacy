@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Add Medicine - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Add New Medicine</h1>
+<div class="subtitle">Cabinet is auto-assigned based on usage frequency and remaining capacity</div>
+
+{% if message %}
+<div class="msg {{ 'success' if success else 'error' }}">{{ message }}</div>
+{% endif %}
+
+{% if cabinet_result %}
+<div class="expiry-banner" style="background:var(--mint-100); border-color:var(--line);">
+  <div class="panel-title" style="color:var(--teal-700);">Assigned Cabinet</div>
+  <div style="font-size:13px;">{{ cabinet_result.cabinet_name }} <span class="cabinet-tag">{{ cabinet_result.priority_level }} priority</span></div>
+  {% if cabinet_result.alert %}
+  <div style="color:var(--red); font-size:12.5px; margin-top:6px;">{{ cabinet_result.alert }}</div>
+  {% endif %}
+</div>
+{% endif %}
+
+<div class="panel">
+  <form method="POST">
+    <div class="form-grid">
+      <div class="form-field full"><label>Medicine Name</label><input type="text" name="medicine_name" required></div>
+      <div class="form-field"><label>Category</label><input type="text" name="category"></div>
+      <div class="form-field"><label>Active Ingredient</label><input type="text" name="active_ingredient" placeholder="e.g. Paracetamol"></div>
+      <div class="form-field"><label>Dosage / Strength</label><input type="text" name="dosage_strength" placeholder="e.g. 500mg"></div>
+      <div class="form-field full"><label>Usage / What it's for</label><input type="text" name="usage_description" placeholder="e.g. Fever and pain relief"></div>
+      <div class="form-field">
+        <label>Storage Condition</label>
+        <select name="storage_condition">
+          <option>Room temperature</option>
+          <option>Refrigerated</option>
+          <option>Protect from light</option>
+          <option>Protect from excessive heat</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Prescription Required</label>
+        <select name="prescription_required">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Stock Quantity</label><input type="number" name="stock_quantity" min="0" required></div>
+      <div class="form-field"><label>Minimum Stock Level</label><input type="number" name="min_stock_level" min="0" required></div>
+      <div class="form-field"><label>Expiry Date</label><input type="date" name="expiry_date" required></div>
+    </div>
+    <button type="submit" class="btn">Add Medicine</button>
+  </form>
+</div>
+
+{% endblock %}

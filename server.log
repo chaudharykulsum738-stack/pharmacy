@@ -1,0 +1,23 @@
+Starting Flask server...
+Flask app imported successfully.
+Registered routes:
+  /static/<path:filename> -> static
+  /register -> register
+  /login -> login
+  /logout -> logout
+  / -> dashboard
+  /add_sale -> add_sale
+  /add_medicine -> add_medicine
+  /edit_medicine/<int:medicine_id> -> edit_medicine
+  /delete_medicine/<int:medicine_id> -> delete_medicine
+  /receipt/<int:sale_id> -> receipt
+  /medicine_review -> medicine_review
+  /manage_substitutes -> manage_substitutes
+  /remove_substitute/<int:substitute_id> -> remove_substitute
+  /export_inventory_report -> export_inventory_report
+  /export_sales_dataset -> export_sales_dataset
+  /suggest_cabinet/<int:medicine_id> -> suggest_cabinet
+  /sales_trend -> sales_trend
+  /shortage_prediction -> shortage_prediction
+
+Starting server on http://127.0.0.1:5000

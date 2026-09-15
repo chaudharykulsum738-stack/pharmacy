@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Medicine Review - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Overall Medicine Review</h1>
+<div class="subtitle">Quick check before dispensing — search a medicine to see everything about it in one place</div>
+
+<div class="panel">
+  <form method="GET" style="display:flex; gap:10px; max-width:520px;">
+    <input type="text" name="q" value="{{ query }}" placeholder="Type a medicine name..." style="flex:1;" autofocus>
+    <button type="submit" class="btn" style="margin-top:0;">Search</button>
+  </form>
+</div>
+
+{% if query and not result %}
+<div class="msg error">No medicine matching "{{ query }}" found in your inventory.</div>
+{% endif %}
+
+{% if result %}
+<div class="panel">
+  <div class="panel-title">{{ result.medicine_name }}</div>
+
+  {% if result.prescription_required == 'Yes' %}
+  <div class="msg error" style="margin-bottom:16px;">
+    <strong>Prescription verification required before dispensing.</strong>
+  </div>
+  {% endif %}
+
+  {% if result.expiry_date and result.expiry_date < today %}
+  <div class="msg error" style="margin-bottom:16px;">
+    <strong>This medicine has EXPIRED ({{ result.expiry_date }}).</strong> Do not dispense.
+  </div>
+  {% endif %}
+
+  <table>
+    <tr><th>Field</th><th>Detail</th></tr>
+    <tr><td class="med-name">Active Ingredient</td><td>{{ result.active_ingredient or '-' }}</td></tr>
+    <tr><td class="med-name">Dosage / Strength</td><td>{{ result.dosage_strength or '-' }}</td></tr>
+    <tr><td class="med-name">Category</td><td>{{ result.category or '-' }}</td></tr>
+    <tr><td class="med-name">Usage</td><td>{{ result.usage_description or '-' }}</td></tr>
+    <tr><td class="med-name">Available Stock</td><td class="mono">{{ result.stock_quantity }}</td></tr>
+    <tr><td class="med-name">Expiry Date</td><td class="mono">{{ result.expiry_date }}</td></tr>
+    <tr><td class="med-name">Storage Condition</td><td>{{ result.storage_condition }}</td></tr>
+    <tr><td class="med-name">Prescription Required</td><td>{{ result.prescription_required }}</td></tr>
+    <tr>
+      <td class="med-name">Status</td>
+      <td>
+        {% if result.stock_status == 'Low Stock' %}
+        <span class="status-pill status-low"><span class="dot"></span>Low Stock</span>
+        {% else %}
+        <span class="status-pill status-ok"><span class="dot"></span>OK</span>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  {% if substitutes %}
+  <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--line);">
+    <div class="panel-title" style="font-size:13px;">Possible Alternatives (pharmacist-reviewed)</div>
+    <div style="font-size:12.5px; color:var(--ink-soft); margin-bottom:8px;">
+      These share the same active ingredient/category. Confirm suitability before substituting — this system does not prescribe.
+    </div>
+    <ul style="margin:0; padding-left:18px; font-size:13px;">
+      {% for s in substitutes %}
+      <li>{{ s.medicine_name }} (Stock: {{ s.stock_quantity }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

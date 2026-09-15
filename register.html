@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Smart Pharmacy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+{% include '_pwa_head.html' %}
+</head>
+<body>
+<div class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-mark">+</div>
+    <div class="auth-brand">Smart Pharmacy</div>
+    <div class="auth-tagline">Create Your Owner Account</div>
+
+    {% if error %}
+    <div class="msg error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+    <div class="msg success">{{ success }} You can now log in.</div>
+    {% endif %}
+
+    <form method="POST">
+      <div class="form-field full"><label>Your Name</label><input type="text" name="name" required></div>
+      <div class="form-field full" style="margin-top:12px;"><label>Email</label><input type="email" name="email" required></div>
+      <div class="form-field full" style="margin-top:12px;"><label>Password</label><input type="password" name="password" required minlength="6"></div>
+      <button type="submit" class="btn" style="margin-top:18px;">Create Account</button>
+    </form>
+
+    <div class="auth-switch">Already have an account? <a href="/login">Log in here</a></div>
+  </div>
+</div>
+{% include '_pwa_register.html' %}
+</body>
+</html>

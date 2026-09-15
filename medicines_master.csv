@@ -1,0 +1,64 @@
+group_id,medicine_name,category,usage_description,active_ingredient,dosage_strength,storage_condition,prescription_required,min_stock_level,expiry_days_from_today,start_stock_quantity
+1,Paracetamol 500mg,Painkiller,Fever and mild pain relief,Paracetamol,500mg,Room temperature,No,15,200,40
+1,Crocin 500mg,Painkiller,Fever and mild pain relief,Paracetamol,500mg,Room temperature,No,15,260,300
+1,Dolo 650mg,Painkiller,"Fever and pain relief, stronger dose",Paracetamol,650mg,Room temperature,No,15,300,250
+2,Cetirizine 10mg,Antihistamine,"Allergy relief - sneezing, itching, runny nose",Cetirizine,10mg,Room temperature,No,12,320,35
+2,Levocetirizine 5mg,Antihistamine,"Allergy relief, lower sedation",Levocetirizine,5mg,Room temperature,No,12,340,280
+2,Allegra 120mg,Antihistamine,"Allergy relief, non-drowsy",Fexofenadine,120mg,Room temperature,No,12,280,260
+3,Amoxicillin 250mg,Antibiotic,Bacterial infections (broad-spectrum antibiotic),Amoxicillin,250mg,Room temperature,Yes,10,180,220
+3,Augmentin 625mg,Antibiotic,"Bacterial infections, stronger/broader antibiotic",Amoxicillin + Clavulanate,625mg,Room temperature,Yes,10,220,200
+4,Pantoprazole 40mg,Antacid,"Acidity, heartburn, acid reflux",Pantoprazole,40mg,Room temperature,No,10,250,240
+4,Omeprazole 20mg,Antacid,Acidity and stomach ulcer relief,Omeprazole,20mg,Room temperature,No,10,300,230
+5,Cough Syrup - Benadryl,Cold & Cough,Dry cough relief,Diphenhydramine,Syrup,Room temperature,No,10,12,18
+5,Cough Syrup - Ascoril,Cold & Cough,Cough with congestion/mucus relief,Bromhexine + Salbutamol,Syrup,Room temperature,No,10,150,90
+6,Metformin 500mg,Antidiabetic,Blood sugar control in Type 2 diabetes,Metformin,500mg,Room temperature,Yes,12,270,200
+6,Glycomet 500mg,Antidiabetic,Blood sugar control in Type 2 diabetes,Metformin,500mg,Room temperature,Yes,12,240,180
+7,Amlodipine 5mg,Antihypertensive,Blood pressure control,Amlodipine,5mg,Room temperature,Yes,12,260,210
+7,Amlodac 5mg,Antihypertensive,Blood pressure control,Amlodipine,5mg,Room temperature,Yes,12,230,190
+8,Telma 40mg,Antihypertensive,Blood pressure control,Telmisartan,40mg,Room temperature,Yes,10,300,160
+8,Telmisartan 40mg,Antihypertensive,Blood pressure control,Telmisartan,40mg,Room temperature,Yes,10,280,150
+9,Calcirol Sachet (Vitamin D3),Vitamin & Supplement,Vitamin D deficiency supplement,Cholecalciferol (Vitamin D3),60000 IU,Room temperature,No,15,10,25
+9,Uprise D3 Sachet,Vitamin & Supplement,Vitamin D deficiency supplement,Cholecalciferol (Vitamin D3),60000 IU,Room temperature,No,15,320,140
+10,Neurobion Forte,Vitamin & Supplement,Vitamin B-complex supplement for nerve health,Vitamin B Complex,Standard,Room temperature,No,12,250,170
+10,B-Complex Forte,Vitamin & Supplement,Vitamin B-complex supplement,Vitamin B Complex,Standard,Room temperature,No,12,260,160
+11,Fluconazole 150mg,Antifungal,Fungal infection treatment,Fluconazole,150mg,Room temperature,Yes,8,210,90
+11,Zocon 150mg,Antifungal,Fungal infection treatment,Fluconazole,150mg,Room temperature,Yes,8,200,85
+12,Ondansetron 4mg,Antiemetic,Nausea and vomiting relief,Ondansetron,4mg,Room temperature,Yes,10,240,120
+12,Emeset 4mg,Antiemetic,Nausea and vomiting relief,Ondansetron,4mg,Room temperature,Yes,10,230,110
+13,Cremaffin Syrup,Laxative,Constipation relief (laxative),Liquid Paraffin + Milk of Magnesia,Syrup,Room temperature,No,8,180,70
+13,Duphalac Syrup,Laxative,Constipation relief (laxative),Lactulose,Syrup,Room temperature,No,8,190,65
+14,Electral Powder,Electrolyte / ORS,Rehydration during diarrhea/dehydration,Oral Rehydration Salts,Powder,Room temperature,No,15,8,20
+14,ORSL Powder,Electrolyte / ORS,Rehydration during diarrhea/dehydration,Oral Rehydration Salts,Powder,Room temperature,No,15,300,130
+15,Moxifloxacin Eye Drops,Eye Drops,Bacterial eye infection treatment,Moxifloxacin,0.5%,Protect from light,No,10,190,60
+15,Ciplox Eye Drops,Eye Drops,Bacterial eye infection treatment,Ciprofloxacin,0.3%,Protect from light,No,10,170,55
+16,Waxsol Ear Drops,Ear Drops,Ear wax softening/removal,Docusate Sodium,5%,Room temperature,No,8,220,40
+16,Cerumol Ear Drops,Ear Drops,Ear wax softening/removal,Chlorobutanol + Paradichlorobenzene,Standard,Room temperature,No,8,210,38
+17,Evion 400 Capsules (Vitamin E),Capsules,Vitamin E supplement for skin/hair health,Vitamin E (Tocopherol),400mg,Room temperature,No,12,300,150
+17,Vitamin E 400 Capsules,Capsules,Vitamin E supplement for skin/hair health,Vitamin E (Tocopherol),400mg,Room temperature,No,12,280,140
+18,Doxycycline 100mg Capsules,Capsules,Bacterial infection treatment (antibiotic),Doxycycline,100mg,Protect from light,Yes,10,9,15
+18,Doxy 100 Capsules,Capsules,Bacterial infection treatment (antibiotic),Doxycycline,100mg,Protect from light,Yes,10,200,110
+19,Dexorange Syrup (Iron Tonic),Tonic,Iron deficiency/anemia tonic,Ferric Ammonium Citrate + Folic Acid,Syrup,Room temperature,No,10,250,80
+19,Fefol Syrup (Iron Tonic),Tonic,Iron deficiency/anemia tonic,Ferrous Fumarate + Folic Acid,Syrup,Room temperature,No,10,240,75
+20,Soframycin Ointment,Healing Ointment,"Wound healing, antiseptic for minor cuts",Framycetin,1%,Room temperature,No,8,230,70
+20,Betadine Ointment,Healing Ointment,"Wound healing, antiseptic for minor cuts",Povidone Iodine,5%,Room temperature,No,8,260,65
+21,Ibuprofen 400mg,NSAID / Analgesic,"Pain, inflammation, and fever relief",Ibuprofen,400mg,Room temperature,No,15,260,220
+22,Diclofenac 50mg,NSAID / Analgesic,Pain and inflammation relief,Diclofenac,50mg,Room temperature,No,12,240,180
+23,Naproxen 250mg,NSAID / Analgesic,"Pain and inflammation relief, longer-acting",Naproxen,250mg,Room temperature,No,10,270,150
+24,Aspirin 325mg,NSAID / Analgesic,"Pain, fever, and inflammation relief",Aspirin,325mg,Room temperature,No,15,300,200
+25,Mefenamic Acid 500mg,NSAID / Analgesic,"Pain relief, commonly for menstrual cramps",Mefenamic Acid,500mg,Room temperature,No,10,220,130
+26,Ketorolac 10mg,NSAID / Analgesic,Short-term relief of moderate to severe pain,Ketorolac,10mg,Room temperature,Yes,8,11,14
+27,Diclofenac Gel,Topical Analgesic,Topical pain and inflammation relief,Diclofenac,1% Gel,Room temperature,No,10,210,60
+27,Menthol + Methyl Salicylate Gel,Topical Analgesic,Topical muscle and joint pain relief,Menthol + Methyl Salicylate,Gel,Room temperature,No,10,250,70
+28,Paracetamol 650mg,Painkiller,"Fever and pain relief, higher dose",Paracetamol,650mg,Room temperature,No,15,240,200
+29,Paracetamol Syrup,Painkiller,"Fever and pain relief, liquid form (children/elderly)",Paracetamol,125mg/5ml Syrup,Room temperature,No,10,150,60
+30,Ibuprofen 200mg,NSAID / Analgesic,"Pain, inflammation, and fever relief, lower dose",Ibuprofen,200mg,Room temperature,No,15,250,190
+31,Ibuprofen Syrup,NSAID / Analgesic,"Pain and fever relief, liquid form",Ibuprofen,100mg/5ml Syrup,Room temperature,No,10,140,55
+32,Ibuprofen + Paracetamol,Combination Analgesic,Combined pain and fever relief,Ibuprofen + Paracetamol,400mg/325mg,Room temperature,No,12,230,160
+33,Aceclofenac 100mg,NSAID / Analgesic,"Pain and inflammation relief, joint/muscle pain",Aceclofenac,100mg,Room temperature,No,12,220,150
+34,Aceclofenac + Paracetamol,Combination Analgesic,"Combined pain, inflammation, and fever relief",Aceclofenac + Paracetamol,100mg/325mg,Room temperature,No,12,210,140
+35,Nimesulide 100mg,NSAID / Analgesic,Pain and inflammation relief,Nimesulide,100mg,Room temperature,No,10,200,120
+36,Aspirin 75mg,Antiplatelet (Low-dose Aspirin),Low-dose blood thinner for heart protection,Aspirin,75mg,Room temperature,No,15,280,210
+37,Aspirin 150mg,Antiplatelet (Low-dose Aspirin),Low-dose blood thinner for heart protection,Aspirin,150mg,Room temperature,No,15,270,190
+38,Pain Relief Balm,Topical Analgesic - OTC,"Topical muscle/joint pain relief, balm form",Menthol + Camphor,Balm,Room temperature,No,12,300,100
+38,Pain Relief Spray,Topical Analgesic - OTC,"Topical muscle/joint pain relief, spray form",Menthol + Methyl Salicylate,Spray,Room temperature,No,12,290,95
+38,Pain Relief Patch,Topical Analgesic - OTC,"Topical muscle/joint pain relief, patch form",Diclofenac,Patch,Room temperature,No,12,320,110

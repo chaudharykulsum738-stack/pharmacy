@@ -1,0 +1,253 @@
+/* ============================================
+   Smart Pharmacy — Design System
+   Palette: deep clinical teal + mint, warm amber/red status accents
+   Type: Space Grotesk (display) / Inter (body) / IBM Plex Mono (data)
+   ============================================ */
+
+:root{
+  --teal-900:#0b3d3f;
+  --teal-700:#0f5257;
+  --teal-500:#17767c;
+  --mint-100:#eef6f4;
+  --paper:#ffffff;
+  --ink:#16241f;
+  --ink-soft:#5c7a78;
+  --line:#dbe7e4;
+  --amber:#c8811a;
+  --amber-bg:#fdf1de;
+  --red:#b23a2f;
+  --red-bg:#fbe9e6;
+  --green:#2f7d54;
+  --green-bg:#e9f5ee;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  background:var(--mint-100);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+}
+
+h1,h2,h3{ font-family:'Space Grotesk',sans-serif; color:var(--teal-900); }
+h1{ font-size:22px; margin:0 0 4px 0; }
+h2{ font-size:15px; margin:0 0 14px 0; font-weight:600; }
+.subtitle{ color:var(--ink-soft); font-size:13px; margin-bottom:22px; }
+.mono{ font-family:'IBM Plex Mono',monospace; }
+
+/* ---------- App shell ---------- */
+.app{ display:flex; min-height:100vh; }
+
+.sidebar{
+  width:220px;
+  background:var(--teal-900);
+  color:#dceee9;
+  padding:24px 16px;
+  flex-shrink:0;
+}
+.brand{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:17px;
+  color:#fff;
+  letter-spacing:-0.01em;
+  margin-bottom:2px;
+}
+.brand-sub{
+  font-size:11px;
+  color:#8fbdb5;
+  margin-bottom:10px;
+  font-family:'IBM Plex Mono',monospace;
+  letter-spacing:0.03em;
+}
+.user-chip{
+  font-size:12px;
+  color:#a9d2cb;
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.nav-item{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:8px;
+  color:#c6ddd8;
+  font-size:13px;
+  font-weight:500;
+  cursor:pointer;
+  margin-bottom:4px;
+  text-decoration:none;
+  transition:background .15s;
+}
+.nav-item:hover{ background:rgba(255,255,255,0.06); }
+.nav-item.active{ background:var(--teal-500); color:#fff; }
+.nav-dot{ width:6px; height:6px; border-radius:50%; background:currentColor; opacity:0.6; flex-shrink:0; }
+.nav-logout{
+  margin-top:20px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.nav-logout .nav-item{ color:#f3b6ac; }
+.nav-logout .nav-item:hover{ background:rgba(178,58,47,0.18); }
+
+.main{ flex:1; padding:28px 36px; max-width:1100px; }
+
+/* ---------- Stat cards ---------- */
+.stats{ display:flex; gap:14px; margin-bottom:24px; }
+.stat-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px 18px;
+  flex:1;
+}
+.stat-num{ font-family:'IBM Plex Mono',monospace; font-size:24px; font-weight:600; color:var(--teal-900); }
+.stat-label{ font-size:12px; color:var(--ink-soft); margin-top:2px; }
+.stat-card.warn .stat-num{ color:var(--amber); }
+.stat-card.danger .stat-num{ color:var(--red); }
+
+/* ---------- Panels ---------- */
+.panel{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px 22px;
+  margin-bottom:20px;
+}
+.panel-title{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:15px;
+  font-weight:600;
+  color:var(--teal-900);
+  margin:0 0 14px 0;
+}
+
+/* ---------- Expiry banner ---------- */
+.expiry-banner{
+  background:var(--amber-bg);
+  border:1px solid #f0d6ab;
+  border-radius:10px;
+  padding:14px 18px;
+  margin-bottom:20px;
+}
+.expiry-banner .panel-title{ color:var(--amber); margin-bottom:8px; }
+.expiry-list{ display:flex; flex-direction:column; gap:6px; }
+.expiry-row{ display:flex; justify-content:space-between; font-size:13px; }
+.expiry-row .days{ font-family:'IBM Plex Mono',monospace; color:var(--amber); font-weight:600; }
+.expiry-empty{ color:var(--ink-soft); font-size:13px; font-style:italic; }
+
+/* ---------- Table ---------- */
+table{ width:100%; border-collapse:collapse; }
+th{
+  text-align:left;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  color:var(--ink-soft);
+  font-weight:600;
+  padding:8px 10px;
+  border-bottom:1px solid var(--line);
+}
+td{
+  padding:10px 10px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
+  vertical-align:top;
+}
+tr:last-child td{ border-bottom:none; }
+.med-name{ font-weight:600; color:var(--ink); }
+
+.status-pill{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600;
+}
+.status-pill .dot{ width:7px; height:7px; border-radius:50%; }
+.status-ok{ background:var(--green-bg); color:var(--green); }
+.status-ok .dot{ background:var(--green); }
+.status-low{ background:var(--red-bg); color:var(--red); }
+.status-low .dot{ background:var(--red); }
+
+.sub-note{ font-size:11.5px; color:var(--teal-500); margin-top:4px; }
+.cabinet-tag{
+  font-size:11px; background:var(--mint-100); color:var(--teal-700);
+  padding:2px 8px; border-radius:6px; font-family:'IBM Plex Mono',monospace;
+}
+.risk-shortage{ color:var(--red); font-weight:600; }
+.risk-ok{ color:var(--green); font-weight:600; }
+.risk-unknown{ color:var(--ink-soft); font-style:italic; }
+
+/* ---------- Forms ---------- */
+.form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:520px; }
+.form-field{ display:flex; flex-direction:column; gap:5px; }
+.form-field.full{ grid-column:1/3; }
+label{ font-size:12px; font-weight:600; color:var(--teal-900); }
+input,select{
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  background:#fbfdfc;
+}
+input:focus,select:focus{
+  outline:2px solid var(--teal-500);
+  outline-offset:1px;
+}
+.btn{
+  background:var(--teal-700);
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:7px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  margin-top:4px;
+  width:fit-content;
+}
+.btn:hover{ background:var(--teal-900); }
+
+/* ---------- Messages ---------- */
+.msg{ padding:10px 14px; margin-bottom:15px; border-radius:8px; font-size:13px; }
+.msg.success{ background:var(--green-bg); color:var(--green); }
+.msg.error{ background:var(--red-bg); color:var(--red); }
+
+/* ---------- Auth pages (login/register) ---------- */
+.auth-screen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle at 30% 20%, #123f42 0%, var(--teal-900) 55%, #082a2c 100%);
+}
+.auth-card{
+  background:var(--paper);
+  border-radius:16px;
+  padding:36px 34px;
+  width:340px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.auth-mark{
+  width:44px; height:44px; border-radius:12px;
+  background:var(--teal-700); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700;
+  margin:0 auto 16px auto;
+}
+.auth-brand{
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700; font-size:19px; color:var(--teal-900);
+  text-align:center;
+}
+.auth-tagline{
+  font-size:12.5px; color:var(--ink-soft); margin-top:4px; margin-bottom:20px;
+  text-align:center;
+}
+.auth-card .btn{ width:100%; justify-content:center; text-align:center; display:block; }
+.auth-switch{ text-align:center; margin-top:16px; font-size:13px; color:var(--ink-soft); }
+.auth-switch a{ color:var(--teal-700); font-weight:600; text-decoration:none; }
+.auth-switch a:hover{ text-decoration:underline; }

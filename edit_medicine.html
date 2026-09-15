@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Edit Medicine - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Edit Medicine</h1>
+<div class="subtitle">Update stock, expiry, or details for {{ medicine.medicine_name }}</div>
+
+<div class="panel">
+  <form method="POST">
+    <div class="form-grid">
+      <div class="form-field full"><label>Medicine Name</label><input type="text" name="medicine_name" value="{{ medicine.medicine_name }}" required></div>
+      <div class="form-field"><label>Category</label><input type="text" name="category" value="{{ medicine.category or '' }}"></div>
+      <div class="form-field"><label>Active Ingredient</label><input type="text" name="active_ingredient" value="{{ medicine.active_ingredient or '' }}"></div>
+      <div class="form-field"><label>Dosage / Strength</label><input type="text" name="dosage_strength" value="{{ medicine.dosage_strength or '' }}"></div>
+      <div class="form-field full"><label>Usage / What it's for</label><input type="text" name="usage_description" value="{{ medicine.usage_description or '' }}"></div>
+      <div class="form-field">
+        <label>Storage Condition</label>
+        <select name="storage_condition">
+          {% for opt in ['Room temperature', 'Refrigerated', 'Protect from light', 'Protect from excessive heat'] %}
+          <option {{ 'selected' if medicine.storage_condition == opt else '' }}>{{ opt }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Prescription Required</label>
+        <select name="prescription_required">
+          <option value="No" {{ 'selected' if medicine.prescription_required == 'No' else '' }}>No</option>
+          <option value="Yes" {{ 'selected' if medicine.prescription_required == 'Yes' else '' }}>Yes</option>
+        </select>
+      </div>
+      <div class="form-field"><label>Stock Quantity</label><input type="number" name="stock_quantity" min="0" value="{{ medicine.stock_quantity }}" required></div>
+      <div class="form-field"><label>Minimum Stock Level</label><input type="number" name="min_stock_level" min="0" value="{{ medicine.min_stock_level }}" required></div>
+      <div class="form-field"><label>Expiry Date</label><input type="date" name="expiry_date" value="{{ medicine.expiry_date }}" required></div>
+    </div>
+    <button type="submit" class="btn">Save Changes</button>
+  </form>
+</div>
+
+<form method="POST" action="/delete_medicine/{{ medicine.medicine_id }}" onsubmit="return confirm('Delete {{ medicine.medicine_name }}? This can\'t be undone.');">
+  <button type="submit" class="btn" style="background:var(--red); margin-top:0;">Delete Medicine</button>
+</form>
+
+{% endblock %}

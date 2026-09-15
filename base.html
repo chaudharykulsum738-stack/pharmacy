@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Smart Pharmacy{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/style.css">
+{% include '_pwa_head.html' %}
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="app">
+
+  <div class="sidebar">
+    <div class="brand">Smart Pharmacy</div>
+    <div class="brand-sub">OWNER CONSOLE</div>
+    <div class="user-chip">{{ session.get('user_name', '') }}</div>
+
+    <a class="nav-item {{ 'active' if request.path == '/' else '' }}" href="/"><span class="nav-dot"></span> Dashboard</a>
+    <a class="nav-item {{ 'active' if request.path == '/medicine_review' else '' }}" href="/medicine_review"><span class="nav-dot"></span> Medicine Review</a>
+    <a class="nav-item {{ 'active' if request.path == '/add_sale' else '' }}" href="/add_sale"><span class="nav-dot"></span> Record Sale</a>
+    <a class="nav-item {{ 'active' if request.path == '/add_medicine' else '' }}" href="/add_medicine"><span class="nav-dot"></span> Add Medicine</a>
+    <a class="nav-item {{ 'active' if request.path == '/manage_substitutes' else '' }}" href="/manage_substitutes"><span class="nav-dot"></span> Manage Substitutes</a>
+    <a class="nav-item {{ 'active' if request.path == '/sales_trend' else '' }}" href="/sales_trend"><span class="nav-dot"></span> Sales Trends</a>
+    <a class="nav-item {{ 'active' if request.path == '/shortage_prediction' else '' }}" href="/shortage_prediction"><span class="nav-dot"></span> Shortage Prediction</a>
+
+    <div class="nav-logout">
+      <a class="nav-item" href="/logout"><span class="nav-dot"></span> Log Out</a>
+    </div>
+  </div>
+
+  <div class="main">
+    {% block content %}{% endblock %}
+  </div>
+
+</div>
+{% include '_pwa_register.html' %}
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

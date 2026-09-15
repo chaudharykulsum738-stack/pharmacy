@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Record Sale - Smart Pharmacy{% endblock %}
+{% block content %}
+
+<h1>Record a Sale</h1>
+<div class="subtitle">Recording a sale updates stock instantly via the low-stock trigger</div>
+
+{% if message %}
+<div class="msg {{ 'success' if success else 'error' }}">{{ message }}</div>
+{% if success and last_sale_id %}
+<a href="/receipt/{{ last_sale_id }}" class="btn" style="text-decoration:none; display:inline-block; margin-bottom:15px;" target="_blank">View / Print Receipt</a>
+{% endif %}
+{% endif %}
+
+<div class="panel">
+  <form method="POST">
+    <div class="form-grid">
+      <div class="form-field"><label>Customer Name</label><input type="text" name="customer_name" required></div>
+      <div class="form-field"><label>Contact Number</label><input type="text" name="contact_number" required></div>
+      <div class="form-field full">
+        <label>Medicine Name</label>
+        <input type="text" name="medicine_name" placeholder="Type the exact medicine name" required autocomplete="off">
+      </div>
+      <div class="form-field"><label>Quantity</label><input type="number" name="quantity" min="1" required></div>
+      <div class="form-field full" style="flex-direction:row; align-items:center; gap:8px;">
+        <input type="checkbox" name="prescription_verified" id="rx-verified" style="width:auto;">
+        <label for="rx-verified" style="margin:0;">Prescription verified (only needed if this medicine requires one)</label>
+      </div>
+    </div>
+    <button type="submit" class="btn">Record Sale</button>
+  </form>
+</div>
+
+{% endblock %}
